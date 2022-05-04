@@ -1,0 +1,7 @@
+cargo:rerun-if-changed=D:\COSC519_Linux_Distro\cosc519_OS\Cargo.toml
+cargo:rustc-link-search=native=D:\COSC519_Linux_Distro\cosc519_OS\target\bootimage\bootloader\x86_64-bootloader\release\build\bootloader-7ac855d0951e4592\out
+cargo:rustc-link-lib=static=kernel_bin-cosc519_OS
+cargo:rerun-if-env-changed=KERNEL
+cargo:rerun-if-env-changed=KERNEL_MANIFEST
+cargo:rerun-if-changed=D:\COSC519_Linux_Distro\cosc519_OS\target\x86_64-proj_os\debug\cosc519_OS
+cargo:rerun-if-changed=build.rs

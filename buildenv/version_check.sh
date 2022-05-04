@@ -6,10 +6,8 @@ MYSH=$(readlink -f /bin/sh)
 echo "/bin/sh -> $MYSH"
 echo $MYSH | grep -q bash || echo "ERROR: /bin/sh does not point to bash"
 unset MYSH
-
 echo -n "Binutils: "; ld --version | head -n1 | cut -d" " -f3-
 bison --version | head -n1
-
 if [ -h /usr/bin/yacc ]; then
   echo "/usr/bin/yacc -> `readlink -f /usr/bin/yacc`";
 elif [ -x /usr/bin/yacc ]; then
@@ -17,12 +15,10 @@ elif [ -x /usr/bin/yacc ]; then
 else
   echo "yacc not found"
 fi
-
 echo -n "Coreutils: "; chown --version | head -n1 | cut -d")" -f2
 diff --version | head -n1
 find --version | head -n1
 gawk --version | head -n1
-
 if [ -h /usr/bin/awk ]; then
   echo "/usr/bin/awk -> `readlink -f /usr/bin/awk`";
 elif [ -x /usr/bin/awk ]; then
@@ -30,7 +26,6 @@ elif [ -x /usr/bin/awk ]; then
 else
   echo "awk not found"
 fi
-
 gcc --version | head -n1
 g++ --version | head -n1
 grep --version | head -n1
@@ -45,7 +40,6 @@ sed --version | head -n1
 tar --version | head -n1
 makeinfo --version | head -n1  # texinfo version
 xz --version | head -n1
-
 echo 'int main(){}' > dummy.c && g++ -o dummy dummy.c
 if [ -x dummy ]
   then echo "g++ compilation OK";
