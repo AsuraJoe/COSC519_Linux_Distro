@@ -1,25 +1,37 @@
 #![no_std]
 #![no_main]
+#![feature(custom_test_frameworks)]
+#![test_runner(cosc519_OS::test_runner)]
+#![reexport_test_harness_main = "test_main"]
 
+use cosc519_OS::println;
 use core::panic::PanicInfo;
-
-//function to call on panic
-#[panic_handler] 
-fn panic(_info: &PanicInfo) -> ! {
-    loop{}
-}
-
-static HELLO: &[u8] = b"This is Trung and Ha";
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    let vga_buffer = 0xb8000 as *mut u8;
+    println!("Hello World{}", "!");
 
-    for (i, &byte) in HELLO.iter().enumerate() {
-        unsafe{
-            *vga_buffer.offset(i as isize * 2) = byte;
-            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
-        }
-    }
-    loop{}
-} 
+    #[cfg(test)]
+    test_main();
+
+    loop {}
+}
+
+/// This function is called on panic.
+#[cfg(not(test))]
+#[panic_handler]
+fn panic(info: &PanicInfo) -> ! {
+    println!("{}", info);
+    loop {}
+}
+
+#[cfg(test)]
+#[panic_handler]
+fn panic(info: &PanicInfo) -> ! {
+    cosc519_OS::test_panic_handler(info)
+}
+
+#[test_case]
+fn trivial_assertion() {
+    assert_eq!(1, 1);
+}
