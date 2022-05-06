@@ -1,1 +1,0 @@
-D:\COSC519_Linux_Distro\cosc519_OS\target\x86_64-proj_os\debug\cosc519_OS: D:\COSC519_Linux_Distro\cosc519_OS\src\lib.rs D:\COSC519_Linux_Distro\cosc519_OS\src\main.rs D:\COSC519_Linux_Distro\cosc519_OS\src\serial.rs D:\COSC519_Linux_Distro\cosc519_OS\src\vga_buffer.rs
