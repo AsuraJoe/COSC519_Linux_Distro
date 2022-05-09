@@ -12,17 +12,17 @@ pub extern "C" fn _start() -> ! {
     println!("Hello World{}", "!");
 
     cosc519_OS::init();
-    fn stack_overflow(){
-        stack_overflow();
-    }
+    // fn stack_overflow(){
+    //     stack_overflow();
+    // }
 
-    stack_overflow();
-
+    // stack_overflow();
+    // x86_64::instructions::interrupts::int3();
     #[cfg(test)]
     test_main();
 
     println!("It did not crash~Yay");
-    loop {}
+    cosc519_OS::hlt_loop();
 }
 
 /// This function is called on panic.
@@ -30,7 +30,7 @@ pub extern "C" fn _start() -> ! {
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    cosc519_OS::hlt_loop();
 }
 
 #[cfg(test)]
