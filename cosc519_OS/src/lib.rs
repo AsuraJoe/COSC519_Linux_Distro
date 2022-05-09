@@ -14,6 +14,7 @@ pub mod interrupts;
 pub mod gdt;
 
 pub fn init() {
+    gdt::init();
     interrupts::init_idt();
 }
 
@@ -77,7 +78,3 @@ fn panic(info: &PanicInfo) -> ! {
     test_panic_handler(info)
 }
 
-pub fn init() {
-    gdt::init();
-    interrupts::init_idt();
-}
