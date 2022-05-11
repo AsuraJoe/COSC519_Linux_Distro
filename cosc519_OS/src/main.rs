@@ -22,11 +22,13 @@ fn kernel_main(boot_info: &'static BootInfo) -> ! {
     // }
 
     // stack_overflow();
+
     // x86_64::instructions::interrupts::int3();
+    // page fault error 
     // let ptr = 0xdeadbeaf as *mut u32;
     // unsafe { *ptr = 42; }
-    use x86_64::registers::control::Cr3;
-    use cosc519_OS::memory::translate_addr;
+    // use x86_64::registers::control::Cr3;
+    // use cosc519_OS::memory::translate_addr;
 
     let phys_mem_offset = VirtAddr::new(boot_info.physical_memory_offset);
     
@@ -82,7 +84,10 @@ fn kernel_main(boot_info: &'static BootInfo) -> ! {
 
     // write the string `New!` to the screen through the new mapping
     let page_ptr: *mut u64 = page.start_address().as_mut_ptr();
-    unsafe { page_ptr.offset(400).write_volatile(0x_f021_f077_f065_f04e)};
+    unsafe { 
+        page_ptr.offset(400).write_volatile(0x_f021_f077_f065_f04e);
+        page_ptr.offset(200).write_volatile(0x_f021_f077_f082_f065);
+        page_ptr.offset(100).write_volatile(0x_f021_f077_f065_f04e)};
 
     #[cfg(test)]
     test_main();
